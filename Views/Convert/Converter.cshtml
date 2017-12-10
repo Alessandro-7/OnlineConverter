@@ -1,0 +1,122 @@
+﻿@model OnlineConverter.Models.Aorp
+
+@{
+    ViewBag.Title = "Converter";
+    Layout = null;
+}
+
+<html>
+    <head>
+        <title>
+            Onine Converter
+        </title>
+        @Styles.Render("~/Content/reset.css")
+        @Styles.Render("~/Content/Form.css")
+       
+    </head>
+    <body>
+        <script type="text/javascript">
+            function getFileName(formType) {
+                let fileType = (formType) ? "audio" : "image";
+                let file = document.getElementById("uploaded-"+fileType).value;
+                file = file.substr(file.lastIndexOf('\\') + 1, file.length - file.lastIndexOf('\\') - 1);
+                document.getElementById(fileType + "-name").innerHTML = file;
+            }
+
+            function validateForm(form) {
+
+                if (form.name == "audioForm") {
+                    document.getElementById("audioErr").innerHTML = "";
+
+                    let elems = form.elements;
+
+                    if (elems.codec.selectedIndex == 0)
+                        document.getElementById("audioErr").innerHTML = "Please select codec.";
+                    else
+                        if (elems.bitrate.selectedIndex == 0)
+                            document.getElementById("audioErr").innerHTML = "Please select bitrate.";
+                        else
+                            if (elems.path.value == "")
+                                document.getElementById("audioErr").innerHTML = "Please select file.";
+                            else {
+                                form.submit();
+                                document.getElementById("audioErr").innerHTML = "Convertation in progress. Please wait...";
+                            }
+                }
+                else {
+                    document.getElementById("imageErr").innerHTML = "";
+                    let elems = form.elements;
+                    if (elems.pathImage.value == "")
+                        document.getElementById("imageErr").innerHTML = "Please select file.";
+                        else {
+                            form.submit();
+                            document.getElementById("imageErr").innerHTML = "Compress is completed!";
+                        }
+
+                }
+
+           
+            }
+        </script>
+
+
+    
+        <div class="login-wrap">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new {name="audioForm", enctype = "multipart/form-data", @class = "form" }))
+            {
+              
+                <h2>Audio Converter</h2>
+                <select class="budget" name="codec">
+                    <option value="0">Select Codec</option>
+                    <option value="1">MP3</option>
+                    <option value="2">FLAC</option>
+                    <option value="3">OPUS</option>
+                    <option value="4">AAC</option>
+                </select>
+                <select class="budget" name="bitrate">
+                    <option value="0">Select Bitrate</option>
+                    <option value="1">96 kbps</option>
+                    <option value="2">192 kbps</option>
+                    <option value="3">256 kbps</option>
+                    <option value="4">320 kbps</option>
+                    <option value="5">1140 kbps</option>
+                </select>
+                <div class="file-upload butt">
+                    <label>
+                        <input type="file" class="butt" name="path" onchange="getFileName(true);" id="uploaded-audio"
+                               accept="video/*,audio/*" >
+                        <span >Choose file</span>
+                    </label>
+                </div>
+
+                <div id="audio-name"></div>
+                <br />
+                <br />
+                <input type="button" class="butt" onclick="validateForm(this.form)" value="Convert" />
+                <br />
+                <div id="audioErr" class="errDiv"></div>
+            }
+        </div>
+        <div class="login-wrap">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new {name="imageForm", enctype = "multipart/form-data", @class = "form" }))
+            {
+                 <h2>Image Compresser</h2>
+                <div class="ranger">Compression Ratio</div>
+                <input type="range" min="1" max="31" step="1" value="5" name="ratio" />
+                <div class="file-upload butt">
+                    <label>
+                        <input type="file" class="butt" name="pathImage" onchange="getFileName(false);" id="uploaded-image"
+                               accept="image/*">
+                        <span>Choose file</span>
+                    </label>
+                </div>
+
+                <div id="image-name"></div>
+                <br />
+                <br />
+                <input type="button" class="butt" onclick="validateForm(this.form)" value="Convert" />
+                <div id="imageErr" class="errDiv"></div>
+            }
+        </div>
+</body>
+</html>
