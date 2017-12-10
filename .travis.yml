@@ -3,4 +3,5 @@ mono: none
 dotnet: 2.0.3
 dist: trusty
 script:
+ - dotnet add package MSBuild.Microsoft.VisualStudio.Web.targets --version 14.0.0.3  
  - dotnet build
