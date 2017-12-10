@@ -69,10 +69,10 @@ namespace OnlineConverter.Controllers
                             "\" -y -qscale " + ratio + " \"" + outFile + "\"";
             Process ffmpeg = new Process();
             ffmpeg.StartInfo.CreateNoWindow = true;
-            // ffmpeg.StartInfo.FileName = @"D:\home\site\repository\ffmpeg.exe";
-            ffmpeg.StartInfo.FileName = @"ffmpeg.exe";
+            ffmpeg.StartInfo.FileName = @"D:\home\site\repository\ffmpeg.exe";
+           // ffmpeg.StartInfo.FileName = @"ffmpeg.exe";
             ffmpeg.StartInfo.Arguments = command;
-          //  ffmpeg.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            ffmpeg.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             ffmpeg.Start();
             ffmpeg.WaitForExit();
 
@@ -114,8 +114,8 @@ namespace OnlineConverter.Controllers
                             "\" -y -map 0:a:0 -b:a " + outBitrate +" -c:a " + codecs[codec] + " \"" + outFile + "\"";
             Process ffmpeg = new Process();
             ffmpeg.StartInfo.CreateNoWindow = true;
-           // ffmpeg.StartInfo.FileName = @"D:\home\site\repository\ffmpeg.exe";
-            ffmpeg.StartInfo.FileName = @"ffmpeg.exe";
+            ffmpeg.StartInfo.FileName = @"D:\home\site\repository\ffmpeg.exe";
+            //ffmpeg.StartInfo.FileName = @"ffmpeg.exe";
             ffmpeg.StartInfo.Arguments = command;
             ffmpeg.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             ffmpeg.Start();
