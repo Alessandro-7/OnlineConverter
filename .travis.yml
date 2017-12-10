@@ -1,6 +1,6 @@
 language: csharp
 mono: none
-dotnet: 1.0.5
+dotnet: 2.0.3
 dist: trusty
 script:
  - dotnet add package MSBuild.Microsoft.VisualStudio.Web.targets --version 14.0.0.3  
