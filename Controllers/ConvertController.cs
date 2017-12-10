@@ -20,7 +20,7 @@ namespace OnlineConverter.Controllers
        public ActionResult Converter()
         {
           //  ViewBag.Con = "test";
-            return View();
+            return View("Converter");
         }
       
         [HttpPost]
@@ -56,7 +56,7 @@ namespace OnlineConverter.Controllers
            
          
            // return RedirectToAction("Converter");
-            return View();
+            return View("Converter");
          
         }
 
