@@ -3,5 +3,4 @@ mono: none
 dotnet: 1.0.1
 dist: trusty
 script:
-sudo apt-get install -qq dotnet-dev-1.0.1
  - dotnet restore
